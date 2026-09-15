@@ -1,0 +1,78 @@
+{
+  "module": "instalacao",
+  "title": "Quiz: Instalação do Node.js e NPM",
+  "questions": [
+    {
+      "id": 1,
+      "question": "O que é o Node.js?",
+      "choices": [
+        {
+          "name": "Um navegador web concorrente do Google Chrome",
+          "value": "a"
+        },
+        {
+          "name": "Um ambiente de execução JavaScript fora do navegador",
+          "value": "b"
+        },
+        {
+          "name": "Um banco de dados NoSQL avançado",
+          "value": "c"
+        },
+        {
+          "name": "Uma biblioteca CSS para estilização de terminais",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O Node.js permite executar códigos JavaScript diretamente na máquina (servidor ou computador), fora do contexto do navegador."
+    },
+    {
+      "id": 2,
+      "question": "Qual é a principal função do NPM?",
+      "choices": [
+        {
+          "name": "Gerenciar pacotes e bibliotecas JavaScript",
+          "value": "a"
+        },
+        {
+          "name": "Compilar códigos em linguagem C para Node.js",
+          "value": "b"
+        },
+        {
+          "name": "Substituir o interpretador do JavaScript",
+          "value": "c"
+        },
+        {
+          "name": "Criar arquivos de estilização em Markdown",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O NPM (Node Package Manager) é o gerenciador de pacotes oficial do Node.js usado para instalar e gerenciar dependências."
+    },
+    {
+      "id": 3,
+      "question": "Qual comando você digita no terminal para verificar se o Node.js está instalado corretamente?",
+      "choices": [
+        {
+          "name": "node --check",
+          "value": "a"
+        },
+        {
+          "name": "npm check-version",
+          "value": "b"
+        },
+        {
+          "name": "node -v",
+          "value": "c"
+        },
+        {
+          "name": "nodejs.install()",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "O comando `node -v` (ou `node --version`) exibe a versão atual instalada do Node.js no seu sistema."
+    }
+  ]
+}

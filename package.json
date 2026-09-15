@@ -1,0 +1,27 @@
+{
+  "name": "tq-node",
+  "version": "1.0.0",
+  "description": "Ferramenta CLI para ensinar o b\u00e1sico sobre Node.js e NPM atrav\u00e9s de tutoriais e quizzes.",
+  "type": "module",
+  "bin": {
+    "tq-node": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^5.0.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0"
+  },
+  "keywords": [
+    "cli",
+    "nodejs",
+    "npm",
+    "tutorial",
+    "quiz",
+    "learn"
+  ],
+  "author": "Jo\u00e3o Paulo Sena Padilha",
+  "license": "MIT"
+}
