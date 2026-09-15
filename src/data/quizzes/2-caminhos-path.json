@@ -1,0 +1,246 @@
+{
+  "module": "caminhos-path",
+  "title": "Quiz: O Módulo `path` e Manipulação de Caminhos",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Por que o uso do módulo nativo 'path' é recomendado ao invés de concatenar strings de caminhos manualmente?",
+      "choices": [
+        {
+          "name": "Porque ele compacta o arquivo para ocupar menos espaço no disco",
+          "value": "a"
+        },
+        {
+          "name": "Para garantir compatibilidade entre diferentes sistemas operacionais que usam barras diferentes",
+          "value": "b"
+        },
+        {
+          "name": "Porque ele substitui a necessidade de usar o NPM em projetos Node.js",
+          "value": "c"
+        },
+        {
+          "name": "Porque ele converte arquivos JavaScript automaticamente para TypeScript",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Sistemas diferentes usam delimitadores distintos (como '/' no Linux/macOS e '\\' no Windows). O módulo `path` adapta o separador de forma dinâmica e segura."
+    },
+    {
+      "id": 2,
+      "question": "Qual é a função do método `path.join()`?",
+      "choices": [
+        {
+          "name": "Unir múltiplos segmentos de caminho usando o separador correto do sistema operacional",
+          "value": "a"
+        },
+        {
+          "name": "Conectar o Node.js a um banco de dados relacional via rede",
+          "value": "b"
+        },
+        {
+          "name": "Juntar duas strings comuns sem relação com arquivos",
+          "value": "c"
+        },
+        {
+          "name": "Combinar dois arrays de dados JSON em um só arquivo",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O `path.join()` junta os segmentos de caminho informados e normaliza o resultado de acordo com o padrão do sistema operacional em execução."
+    },
+    {
+      "id": 3,
+      "question": "O que o método `path.resolve()` retorna?",
+      "choices": [
+        {
+          "name": "Apenas o nome do arquivo ignorando pastas anteriores",
+          "value": "a"
+        },
+        {
+          "name": "Um caminho absoluto completo a partir da raiz do sistema operacional",
+          "value": "b"
+        },
+        {
+          "name": "Uma promessa (Promise) indicando se o arquivo existe ou não",
+          "value": "c"
+        },
+        {
+          "name": "A extensão exata do arquivo especificado",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `path.resolve()` processa uma sequência de caminhos e resolve-os gerando um caminho absoluto baseado no diretório atual de trabalho."
+    },
+    {
+      "id": 4,
+      "question": "Qual será o resultado da execução de `path.extname('index.min.js')`?",
+      "choices": [
+        {
+          "name": ".js",
+          "value": "a"
+        },
+        {
+          "name": "index.min.js",
+          "value": "b"
+        },
+        {
+          "name": ".min.js",
+          "value": "c"
+        },
+        {
+          "name": "js",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O método `path.extname()` retorna a extensão do arquivo a partir do último caractere de ponto (.) até o final da string, ou seja, `.js`."
+    },
+    {
+      "id": 5,
+      "question": "O que o método `path.basename('/home/usuario/projeto/app.js')` retorna?",
+      "choices": [
+        {
+          "name": "/home/usuario/projeto",
+          "value": "a"
+        },
+        {
+          "name": "app.js",
+          "value": "b"
+        },
+        {
+          "name": "app",
+          "value": "c"
+        },
+        {
+          "name": "/home/usuario/projeto/app.js",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `path.basename()` extrai e retorna a última porção de um caminho, que tipicamente corresponde ao nome do arquivo."
+    },
+    {
+      "id": 6,
+      "question": "O que o método `path.dirname('/home/usuario/projeto/app.js')` retorna?",
+      "choices": [
+        {
+          "name": "app.js",
+          "value": "a"
+        },
+        {
+          "name": "/home/usuario/projeto",
+          "value": "b"
+        },
+        {
+          "name": "/home/usuario/projeto/app.js",
+          "value": "c"
+        },
+        {
+          "name": "usuario",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `path.dirname()` retorna o diretório pai (a pasta onde o arquivo está localizado), descartando o nome do arquivo."
+    },
+    {
+      "id": 7,
+      "question": "Por que as variáveis globais `__dirname` e `__filename` não funcionam por padrão quando usamos ES Modules (`import`/`export`)?",
+      "choices": [
+        {
+          "name": "Porque elas foram descontinuadas permanentemente em versões modernas do JavaScript",
+          "value": "a"
+        },
+        {
+          "name": "Porque o escopo de módulos ES no Node.js é isolado e não injeta essas variáveis globais automaticamente",
+          "value": "b"
+        },
+        {
+          "name": "Porque elas só funcionam em sistemas operacionais baseados em Windows",
+          "value": "c"
+        },
+        {
+          "name": "Porque exigem a instalação prévia da biblioteca externa 'chalk'",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Em ES Modules, o Node.js não define `__dirname` e `__filename` globalmente. É preciso obtê-las combinando `import.meta.url` com `fileURLToPath`."
+    },
+    {
+      "id": 8,
+      "question": "Como podemos obter o equivalente a `__dirname` de forma correta utilizando ES Modules?",
+      "choices": [
+        {
+          "name": "Usando diretamente `path.currentDir()`",
+          "value": "a"
+        },
+        {
+          "name": "Combinando `fileURLToPath(import.meta.url)` com `path.dirname()`",
+          "value": "b"
+        },
+        {
+          "name": "Executando o comando `process.env.DIRNAME`",
+          "value": "c"
+        },
+        {
+          "name": "Chamando a função nativa `global.getDirName()`",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Convertemos a URL do módulo para um caminho de arquivo legível com `fileURLToPath(import.meta.url)` e extraímos o diretório com `path.dirname()`."
+    },
+    {
+      "id": 9,
+      "question": "Como o método `path.join()` lida com sequências contendo pontos duplos (`..`), como em `path.join('a', 'b', '..', 'c')`?",
+      "choices": [
+        {
+          "name": "Ele gera um erro de sintaxe crítico no terminal",
+          "value": "a"
+        },
+        {
+          "name": "Ele ignora o ponto duplo e mantém todos os termos intactos",
+          "value": "b"
+        },
+        {
+          "name": "Ele interpreta o `..` voltando uma pasta, resultando em equivalente a 'a/c'",
+          "value": "c"
+        },
+        {
+          "name": "Ele apaga todo o conteúdo do diretório atual por segurança",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "O `path.join()` normaliza o caminho resolvendo o comando relativo `..`, subindo um nível de diretório (removendo o 'b' neste exemplo)."
+    },
+    {
+      "id": 10,
+      "question": "Qual alternativa descreve corretamente a necessidade de instalar o módulo `path` via gerenciador de pacotes?",
+      "choices": [
+        {
+          "name": "Devemos instalar via comando `npm install path` antes de usar",
+          "value": "a"
+        },
+        {
+          "name": "Ele é um módulo nativo embutido, logo não requer nenhuma instalação via NPM",
+          "value": "b"
+        },
+        {
+          "name": "Ele só pode ser instalado se o projeto estiver configurado em TypeScript",
+          "value": "c"
+        },
+        {
+          "name": "Ele vem nativo apenas no Windows, exigindo instalação manual no Linux",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `path` faz parte da biblioteca padrão do Node.js (módulos nativos/core), estando disponível para importação imediata sem dependências externas."
+    }
+  ]
+}
