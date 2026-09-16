@@ -1,5 +1,5 @@
 {
-  "name": "tq-node",
+  "name": "@ninho12/tq-node",
   "version": "1.0.0",
   "description": "Ferramenta CLI para ensinar o b\u00e1sico sobre Node.js e NPM atrav\u00e9s de tutoriais e quizzes.",
   "type": "module",
