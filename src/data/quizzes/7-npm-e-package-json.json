@@ -1,0 +1,246 @@
+{
+  "module": "npm-e-package-json",
+  "title": "Quiz: NPM e package.json: Dependências e Scripts",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual comando cria rapidamente um arquivo `package.json` preenchendo todos os valores padrão sem perguntas interativas?",
+      "choices": [
+        {
+          "name": "npm create project",
+          "value": "a"
+        },
+        {
+          "name": "npm init -y",
+          "value": "b"
+        },
+        {
+          "name": "npm start --default",
+          "value": "c"
+        },
+        {
+          "name": "node --init-package",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O comando `npm init -y` (ou `npm init --yes`) gera de forma instantânea o manifesto `package.json` aceitando todas as respostas padrão sem bloquear o terminal."
+    },
+    {
+      "id": 2,
+      "question": "Qual é a finalidade da seção `devDependencies` no arquivo `package.json`?",
+      "choices": [
+        {
+          "name": "Armazenar senhas e chaves secretas de acesso a bancos de dados",
+          "value": "a"
+        },
+        {
+          "name": "Registrar ferramentas utilizadas apenas durante o desenvolvimento e testes locais, dispensáveis em produção",
+          "value": "b"
+        },
+        {
+          "name": "Listar os usuários do Git autorizados a alterar o código",
+          "value": "c"
+        },
+        {
+          "name": "Definir os navegadores compatíveis com o código do backend",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A seção `devDependencies` agrupa dependências como linters, compiladores e frameworks de testes que são necessários apenas para a equipe de desenvolvimento, não precisando ir para o servidor de produção."
+    },
+    {
+      "id": 3,
+      "question": "No Versionamento Semântico (SemVer: `MAJOR.MINOR.PATCH`), o que sinaliza a mudança no dígito `MAJOR` (ex: de 1.4.2 para 2.0.0)?",
+      "choices": [
+        {
+          "name": "Pequenas correções de segurança sem novas funcionalidades",
+          "value": "a"
+        },
+        {
+          "name": "Inclusão de novos recursos de forma 100% retrocompatível",
+          "value": "b"
+        },
+        {
+          "name": "Mudanças que quebram a compatibilidade com a versão anterior (breaking changes)",
+          "value": "c"
+        },
+        {
+          "name": "Apenas alterações visuais de formatação no README",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "A elevação do número `MAJOR` comunica que a biblioteca possui quebras de compatibilidade com a versão anterior, exigindo atenção do desenvolvedor para adaptar o código que a consome."
+    },
+    {
+      "id": 4,
+      "question": "O que significa o prefixo circunflexo (`^`) em uma dependência como `\"chalk\": \"^5.3.0\"` no `package.json`?",
+      "choices": [
+        {
+          "name": "O NPM só pode baixar versões com número ímpar",
+          "value": "a"
+        },
+        {
+          "name": "O NPM aceita atualizações automáticas de Minor e Patch (< 6.0.0), bloqueando quebras de versão Major",
+          "value": "b"
+        },
+        {
+          "name": "A dependência deve ser compilada com prioridade máxima",
+          "value": "c"
+        },
+        {
+          "name": "O pacote está instalado apenas globalmente no computador",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O prefixo circunflexo (`^`) aceita atualizações que não alterem o primeiro número significativo diferente de zero, permitindo patches e novas features sem quebrar a API principal."
+    },
+    {
+      "id": 5,
+      "question": "Por que o arquivo `package-lock.json` deve ser versionado no Git e nunca colocado no `.gitignore`?",
+      "choices": [
+        {
+          "name": "Porque ele armazena o token pessoal do desenvolvedor no NPM",
+          "value": "a"
+        },
+        {
+          "name": "Para garantir builds determinísticos, travando as versões exatas, URLs de download e hashes criptográficos de toda a árvore de dependências",
+          "value": "b"
+        },
+        {
+          "name": "Porque o Node.js não inicia sem a presença desse arquivo em produção",
+          "value": "c"
+        },
+        {
+          "name": "Para permitir que o repositório seja visualizado em modo público no GitHub",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `package-lock.json` congela a resolução exata de todos os pacotes e subdependências. Ele garante que qualquer pessoa da equipe ou esteira de CI/CD instale exatamente os mesmos bytes."
+    },
+    {
+      "id": 6,
+      "question": "Qual é a principal característica do comando `npm ci` em comparação ao `npm install`?",
+      "choices": [
+        {
+          "name": "Ele serve para criar interfaces de usuário interativas",
+          "value": "a"
+        },
+        {
+          "name": "Ele é projetado para servidores e CI/CD, instalando estritamente a árvore descrita no `package-lock.json` de forma rápida e confiável",
+          "value": "b"
+        },
+        {
+          "name": "Ele ignora totalmente o `package-lock.json` e baixa sempre as versões mais recentes da internet",
+          "value": "c"
+        },
+        {
+          "name": "Ele só pode ser executado em sistemas operacionais baseados em Linux",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `npm ci` (*Clean Install*) é o comando padrão para automações e servidores. Ele é mais rápido que `npm install` e valida estritamente a conformidade entre o `package.json` e o `package-lock.json`."
+    },
+    {
+      "id": 7,
+      "question": "Qual ferramenta do ecossistema Node.js permite executar binários de pacotes do NPM diretamente no terminal sem instalá-los globalmente?",
+      "choices": [
+        {
+          "name": "npm run-direct",
+          "value": "a"
+        },
+        {
+          "name": "npx",
+          "value": "b"
+        },
+        {
+          "name": "node-run",
+          "value": "c"
+        },
+        {
+          "name": "npm-exec-local",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `npx` (*Node Package eXecutor*) baixa temporariamente o pacote em cache, executa seu executável de linha de comando e descarta arquivos desnecessários sem deixar resíduos no sistema."
+    },
+    {
+      "id": 8,
+      "question": "Quais dos scripts a seguir podem ser acionados diretamente pelo terminal sem a palavra-chave `run` (ex: `npm <script>`)?",
+      "choices": [
+        {
+          "name": "build e lint",
+          "value": "a"
+        },
+        {
+          "name": "start e test",
+          "value": "b"
+        },
+        {
+          "name": "deploy e compile",
+          "value": "c"
+        },
+        {
+          "name": "migrate e seed",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O NPM reserva atalhos diretos para os comandos de ciclo de vida mais essenciais, permitindo digitar apenas `npm start` ou `npm test` sem precisar de `npm run`."
+    },
+    {
+      "id": 9,
+      "question": "O que o NPM faz automaticamente quando você define um script chamado `pretest` e executa o comando `npm test`?",
+      "choices": [
+        {
+          "name": "Ele cancela a execução de ambos por conflito de nomenclatura",
+          "value": "a"
+        },
+        {
+          "name": "Ele executa o script `pretest` imediatamente antes de iniciar o script `test`",
+          "value": "b"
+        },
+        {
+          "name": "Ele executa apenas o `pretest` e ignora o `test`",
+          "value": "c"
+        },
+        {
+          "name": "Ele executa o `pretest` somente se o `test` falhar",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O NPM possui ganchos automáticos de pré e pós-execução. Qualquer script nomeado como `pre<comando>` roda automaticamente antes do `<comando>` correspondente."
+    },
+    {
+      "id": 10,
+      "question": "Qual comando do NPM deve ser executado rotineiramente para identificar falhas de segurança conhecidas nas dependências do projeto?",
+      "choices": [
+        {
+          "name": "npm scan-security",
+          "value": "a"
+        },
+        {
+          "name": "npm audit",
+          "value": "b"
+        },
+        {
+          "name": "npm check-vuln",
+          "value": "c"
+        },
+        {
+          "name": "npm verify-integrity",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `npm audit` inspeciona a árvore de dependências contra o banco de dados oficial de vulnerabilidades conhecidas, emitindo um relatório completo com o nível de severidade e sugestões de correção."
+    }
+  ]
+}

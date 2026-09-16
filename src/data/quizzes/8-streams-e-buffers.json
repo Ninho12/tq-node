@@ -1,0 +1,246 @@
+{
+  "module": "streams-e-buffers",
+  "title": "Quiz: Streams e Buffers no Node.js",
+  "questions": [
+    {
+      "id": 1,
+      "question": "O que representa a classe nativa `Buffer` no Node.js?",
+      "choices": [
+        {
+          "name": "Um banco de dados em memória temporária para guardar senhas",
+          "value": "a"
+        },
+        {
+          "name": "Uma região fixa de memória alocada fora da heap da V8 para manipular dados binários puros",
+          "value": "b"
+        },
+        {
+          "name": "Um compilador que converte código JavaScript em bytecode para o navegador",
+          "value": "c"
+        },
+        {
+          "name": "Um plugin obrigatório para fazer requisições HTTP",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `Buffer` é uma estrutura de baixo nível alocada fora da heap do motor V8, projetada para armazenar e processar dados binários brutos (arquivos, pacotes de rede, buffers de áudio/vídeo)."
+    },
+    {
+      "id": 2,
+      "question": "Qual método estático deve ser chamado para converter uma string de texto em um novo `Buffer`?",
+      "choices": [
+        {
+          "name": "Buffer.alloc()",
+          "value": "a"
+        },
+        {
+          "name": "Buffer.from()",
+          "value": "b"
+        },
+        {
+          "name": "Buffer.create()",
+          "value": "c"
+        },
+        {
+          "name": "Buffer.parse()",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O método `Buffer.from(string[, encoding])` cria uma nova instância de Buffer contendo os bytes correspondentes aos caracteres da string fornecida."
+    },
+    {
+      "id": 3,
+      "question": "Qual é o principal benefício de processar um arquivo de 10 Gigabytes com Streams em vez de carregá-lo com `fs.readFile()`?",
+      "choices": [
+        {
+          "name": "O arquivo é criptografado automaticamente contra vírus",
+          "value": "a"
+        },
+        {
+          "name": "O consumo de memória RAM da aplicação permanece baixo e constante (poucos megabytes), pois os dados trafegam em blocos sequenciais (chunks)",
+          "value": "b"
+        },
+        {
+          "name": "O arquivo é convertido automaticamente em código TypeScript",
+          "value": "c"
+        },
+        {
+          "name": "A CPU é desligada para economizar energia durante a leitura",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Com Streams, a leitura ocorre em pequenos blocos sequenciais (*chunks*). Dessa forma, mesmo arquivos com dezenas de gigabytes podem ser processados sem estourar a memória RAM do servidor."
+    },
+    {
+      "id": 4,
+      "question": "Como são classificadas as streams capazes de ler e escrever dados simultaneamente pelo mesmo canal (como um socket TCP de rede)?",
+      "choices": [
+        {
+          "name": "Readable Streams",
+          "value": "a"
+        },
+        {
+          "name": "Writable Streams",
+          "value": "b"
+        },
+        {
+          "name": "Duplex Streams",
+          "value": "c"
+        },
+        {
+          "name": "Static Streams",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "Streams do tipo `Duplex` implementam simultaneamente as duas interfaces (Readable e Writable), permitindo comunicação bidirecional em tempo real."
+    },
+    {
+      "id": 5,
+      "question": "Qual é o propósito específico de uma stream do tipo `Transform` (como as criadas pelo módulo nativo `zlib`)?",
+      "choices": [
+        {
+          "name": "Apagar arquivos do disco automaticamente após a leitura",
+          "value": "a"
+        },
+        {
+          "name": "Receber dados de entrada, modificar/processar seu conteúdo e emitir o resultado modificado na saída",
+          "value": "b"
+        },
+        {
+          "name": "Alterar o nome do arquivo no sistema operacional",
+          "value": "c"
+        },
+        {
+          "name": "Converter código assíncrono em código síncrono",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A `Transform Stream` é uma variante de stream Duplex que aplica uma transformação aos dados recebidos antes de enviá-los para a saída (como compactação gzip, criptografia ou hash)."
+    },
+    {
+      "id": 6,
+      "question": "Por que a função `pipeline` do submódulo `node:stream/promises` é considerada superior ao uso clássico de `.pipe()`?",
+      "choices": [
+        {
+          "name": "Porque `.pipe()` só funciona no ambiente Windows",
+          "value": "a"
+        },
+        {
+          "name": "Porque `pipeline` gerencia o ciclo de vida completo das streams, liberando e destruindo os recursos automaticamente em caso de erro, além de se integrar com `async/await`",
+          "value": "b"
+        },
+        {
+          "name": "Porque `pipeline` elimina a necessidade de conexões TCP de rede",
+          "value": "c"
+        },
+        {
+          "name": "Porque `.pipe()` consome o dobro de largura de banda da internet",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O método `.pipe()` tradicional tem o problema histórico de não fechar as streams de forma segura quando ocorrem falhas no meio do processo. A função `pipeline` fecha adequadamente todas as streams e previne vazamentos de memória."
+    },
+    {
+      "id": 7,
+      "question": "O que descreve o conceito de 'Backpressure' (Contrapressão) em uma cadeia de streams?",
+      "choices": [
+        {
+          "name": "A sobrecarga física da placa de rede gerada por pacotes corrompidos",
+          "value": "a"
+        },
+        {
+          "name": "A situação em que a taxa de envio de dados da leitura supera a capacidade de absorção/gravação do destino, exigindo a pausa temporária do fluxo",
+          "value": "b"
+        },
+        {
+          "name": "A pressão exercida pelo garbage collector para liberar espaço em disco",
+          "value": "c"
+        },
+        {
+          "name": "A rejeição de conexões por falta de certificados SSL válidos",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Backpressure é a resistência gerada quando o destino de escrita não consegue processar os dados na mesma velocidade em que a fonte os fornece. O mecanismo de streams pausa a leitura para evitar acúmulo descontrolado na memória."
+    },
+    {
+      "id": 8,
+      "question": "Qual evento disparado por uma Writable Stream indica que o buffer interno foi esvaziado e que ela está pronta para receber mais dados após uma pausa por contrapressão?",
+      "choices": [
+        {
+          "name": "'ready'",
+          "value": "a"
+        },
+        {
+          "name": "'drain'",
+          "value": "b"
+        },
+        {
+          "name": "'finish'",
+          "value": "c"
+        },
+        {
+          "name": "'unpause'",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O evento `'drain'` avisa que o buffer de escrita interno foi descarregado (drenado), sinalizando que a Readable Stream pode voltar a emitir chunks com segurança."
+    },
+    {
+      "id": 9,
+      "question": "Qual objeto nativo global no Node.js é um exemplo clássico de Writable Stream conectado ao terminal?",
+      "choices": [
+        {
+          "name": "process.stdin",
+          "value": "a"
+        },
+        {
+          "name": "process.stdout",
+          "value": "b"
+        },
+        {
+          "name": "console.buffer",
+          "value": "c"
+        },
+        {
+          "name": "global.terminalStream",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "`process.stdout` é uma Writable Stream integrada ao canal de saída padrão do sistema operacional, utilizada para escrever dados no terminal."
+    },
+    {
+      "id": 10,
+      "question": "Qual é o resultado da execução da instrução `Buffer.alloc(1024)` no Node.js?",
+      "choices": [
+        {
+          "name": "A criação de um arquivo temporário de 1024 KB na pasta raiz do sistema",
+          "value": "a"
+        },
+        {
+          "name": "A alocação segura de um espaço de memória de 1024 bytes (1 KB) preenchido inicialmente com zeros",
+          "value": "b"
+        },
+        {
+          "name": "A limitação de velocidade de download a 1024 bytes por segundo",
+          "value": "c"
+        },
+        {
+          "name": "A conversão automática de 1024 strings para o formato Base64",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "`Buffer.alloc(size)` aloca com segurança uma região contígua de memória de tamanho especificado, garantindo a inicialização dos bytes com zero para evitar vazamento de dados residuais antigos."
+    }
+  ]
+}

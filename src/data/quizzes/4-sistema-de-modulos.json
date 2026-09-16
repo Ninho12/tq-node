@@ -1,0 +1,246 @@
+{
+  "module": "sistema-de-modulos",
+  "title": "Quiz: Sistema de Módulos - CommonJS vs ES Modules",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual propriedade no arquivo `package.json` instrui o Node.js a tratar todos os arquivos com extensão `.js` do projeto como ES Modules?",
+      "choices": [
+        {
+          "name": "\"modules\": true",
+          "value": "a"
+        },
+        {
+          "name": "\"type\": \"module\"",
+          "value": "b"
+        },
+        {
+          "name": "\"mode\": \"esm\"",
+          "value": "c"
+        },
+        {
+          "name": "\"format\": \"ecmascript\"",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A declaração `\"type\": \"module\"` no `package.json` informa ao interpretador do Node.js que todos os arquivos `.js` dentro do escopo daquele pacote devem ser executados sob a especificação de ECMAScript Modules (ESM)."
+    },
+    {
+      "id": 2,
+      "question": "Qual é a principal diferença de comportamento na resolução entre `require()` (CommonJS) e `import` (ES Modules)?",
+      "choices": [
+        {
+          "name": "`require()` é síncrono e avaliado em tempo de execução, enquanto `import` é estático e analisado na fase de compilação/parse",
+          "value": "a"
+        },
+        {
+          "name": "`require()` só aceita arquivos `.json`, enquanto `import` aceita exclusivamente arquivos `.js`",
+          "value": "b"
+        },
+        {
+          "name": "`require()` retorna sempre uma Promise assíncrona, enquanto `import` bloqueia o Event Loop",
+          "value": "c"
+        },
+        {
+          "name": "`require()` é exclusivo de navegadores web e `import` é exclusivo do ambiente Node.js",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O CommonJS executa o `require()` de forma síncrona durante o runtime, permitindo importações condicionais em `if`. Já instruções estáticas de `import` são analisadas antes da execução do código, viabilizando análise estática e otimizações como Tree Shaking."
+    },
+    {
+      "id": 3,
+      "question": "Como podemos forçar um arquivo JavaScript individual a rodar como ES Modules mesmo em um projeto que não possua `\"type\": \"module\"`?",
+      "choices": [
+        {
+          "name": "Utilizando a extensão de arquivo `.cjs`",
+          "value": "a"
+        },
+        {
+          "name": "Utilizando a extensão de arquivo `.mjs`",
+          "value": "b"
+        },
+        {
+          "name": "Inserindo a diretiva `'use esm';` no topo do arquivo",
+          "value": "c"
+        },
+        {
+          "name": "Iniciando o nome do arquivo com o prefixo `esm-`",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A extensão `.mjs` sinaliza explicitamente ao Node.js que o arquivo é um ECMAScript Module. Em contrapartida, a extensão `.cjs` força o arquivo a ser tratado como CommonJS."
+    },
+    {
+      "id": 4,
+      "question": "Por que as variáveis `__dirname` e `__filename` não existem nativamente no escopo de arquivos com ES Modules?",
+      "choices": [
+        {
+          "name": "Porque o Node.js não possui permissão de leitura de diretórios quando roda em modo ESM",
+          "value": "a"
+        },
+        {
+          "name": "Porque o ESM não envolve os arquivos na função de Module Wrapper do CommonJS que injetava essas variáveis",
+          "value": "b"
+        },
+        {
+          "name": "Porque foram removidas por questões de segurança de rede do protocolo HTTPS",
+          "value": "c"
+        },
+        {
+          "name": "Porque elas só funcionam quando o projeto é compilado para binário executável",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "No CommonJS, o Node.js envolve todo arquivo em uma função invisível de wrapper: `(function(exports, require, module, __filename, __dirname) { ... })`. Como o ESM tem escopo estritamente modular e isolado, essa injeção não ocorre."
+    },
+    {
+      "id": 5,
+      "question": "Qual é a maneira correta e idiomática de recuperar o caminho do diretório atual (`__dirname`) em um arquivo ES Modules no Node.js?",
+      "choices": [
+        {
+          "name": "Executar a função global `process.dirname()`",
+          "value": "a"
+        },
+        {
+          "name": "Combinar `fileURLToPath(import.meta.url)` com `path.dirname()`",
+          "value": "b"
+        },
+        {
+          "name": "Acessar a propriedade nativa `import.meta.dirname`",
+          "value": "c"
+        },
+        {
+          "name": "Chamar o método síncrono `fs.getCurrentDirectory()`",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `import.meta.url` fornece a URL do arquivo atual (ex: `file:///c:/app/index.js`). A função `fileURLToPath` do módulo `url` converte para um caminho de SO e `path.dirname` extrai a pasta pai."
+    },
+    {
+      "id": 6,
+      "question": "O que caracteriza o recurso 'Top-Level Await' disponível em módulos ESM modernos no Node.js?",
+      "choices": [
+        {
+          "name": "A capacidade de aguardar requisições de rede sem o uso de conexão de internet",
+          "value": "a"
+        },
+        {
+          "name": "A permissão para utilizar a palavra-chave `await` diretamente no escopo raiz do arquivo, sem envolvê-lo em uma função `async`",
+          "value": "b"
+        },
+        {
+          "name": "Um método que força todas as Promises do projeto a executarem de forma síncrona",
+          "value": "c"
+        },
+        {
+          "name": "Uma regra que obriga o Node.js a aguardar 10 segundos antes de finalizar o processo",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Top-Level Await permite que o desenvolvedor execute instruções `await` diretamente no corpo principal do módulo, simplificando inicializações de conexões de banco ou leituras de arquivos sem precisar criar uma função autoexecutável `async`."
+    },
+    {
+      "id": 7,
+      "question": "Qual é uma das principais vantagens das importações estáticas em ES Modules para ferramentas de build e empacotamento (*bundlers*)?",
+      "choices": [
+        {
+          "name": "Permitir a execução de código PHP diretamente dentro do Node.js",
+          "value": "a"
+        },
+        {
+          "name": "Facilitar o *Tree Shaking*, eliminando funções e módulos exportados que não foram efetivamente utilizados",
+          "value": "b"
+        },
+        {
+          "name": "Impedir qualquer tipo de erro de sintaxe durante o desenvolvimento",
+          "value": "c"
+        },
+        {
+          "name": "Desabilitar a necessidade de memória RAM na máquina do usuário",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Como a estrutura de dependências do ESM é estática e determinística antes do código rodar, empacotadores conseguem rastrear com precisão quais exportações nunca foram importadas e eliminá-las do pacote final (*Tree Shaking*)."
+    },
+    {
+      "id": 8,
+      "question": "Se você estiver trabalhando em um arquivo CommonJS clássico, qual é a sintaxe necessária para importar um pacote moderno puramente ESM (que não suporta `require`)?",
+      "choices": [
+        {
+          "name": "const pacote = require('pacote');",
+          "value": "a"
+        },
+        {
+          "name": "const pacote = (await import('pacote')).default;",
+          "value": "b"
+        },
+        {
+          "name": "const pacote = require.esm('pacote');",
+          "value": "c"
+        },
+        {
+          "name": "const pacote = module.requireAsync('pacote');",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Pacotes puramente ESM lançam um erro `ERR_REQUIRE_ESM` se chamados com `require()`. Para consumi-los em CommonJS, é necessário recorrer à função assíncrona `import()` dinâmico."
+    },
+    {
+      "id": 9,
+      "question": "Ao importar um arquivo local relativo (ex: `calculadora.js`) usando ES Modules nativo no Node.js, qual é a regra quanto à extensão do arquivo?",
+      "choices": [
+        {
+          "name": "A extensão deve ser obrigatoriamente omitida (ex: `./calculadora`)",
+          "value": "a"
+        },
+        {
+          "name": "A extensão do arquivo deve ser explicitada no caminho (ex: `./calculadora.js`)",
+          "value": "b"
+        },
+        {
+          "name": "A extensão deve ser substituída por `.module` sempre",
+          "value": "c"
+        },
+        {
+          "name": "O caminho deve sempre iniciar com `@/calculadora`",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Na especificação estrita do ES Modules adotada pelo Node.js, a resolução de caminhos relativos ou absolutos locais exige a presença da extensão do arquivo (ex: `./calculadora.js`), evitando ambiguidades de resolução de diretórios."
+    },
+    {
+      "id": 10,
+      "question": "No CommonJS, qual é o comportamento do Node.js quando um mesmo arquivo é requisitado múltiplas vezes via `require()` em diferentes pontos do sistema?",
+      "choices": [
+        {
+          "name": "O arquivo é relido e reexecutado a cada nova chamada do `require()`",
+          "value": "a"
+        },
+        {
+          "name": "O módulo é executado apenas na primeira importação e o resultado é salvo em `require.cache`, retornando a mesma referência depois",
+          "value": "b"
+        },
+        {
+          "name": "O Node.js dispara um erro fatal de duplicidade de módulo",
+          "value": "c"
+        },
+        {
+          "name": "Cada chamada apaga a versão anterior da memória para economizar espaço",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O CommonJS possui um mecanismo de cache interno (`require.cache`). Após a primeira execução do arquivo, o objeto exportado permanece na memória e qualquer chamada posterior de `require()` para o mesmo caminho retorna a mesma instância cacheada."
+    }
+  ]
+}

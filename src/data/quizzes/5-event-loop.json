@@ -1,0 +1,246 @@
+{
+  "module": "event-loop",
+  "title": "Quiz: O Event Loop e Assincronicidade no Node.js",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual biblioteca multiplataforma escrita em C/C++ é responsável por fornecer o Event Loop e gerenciar as operações de I/O assíncronas no Node.js?",
+      "choices": [
+        {
+          "name": "V8",
+          "value": "a"
+        },
+        {
+          "name": "libuv",
+          "value": "b"
+        },
+        {
+          "name": "OpenSSL",
+          "value": "c"
+        },
+        {
+          "name": "glibc",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A biblioteca `libuv` é a responsável pela abstração do Event Loop, do pool de threads em segundo plano e das operações de I/O não-bloqueantes entre diferentes sistemas operacionais no Node.js."
+    },
+    {
+      "id": 2,
+      "question": "Qual é a responsabilidade principal da fase 'Timers' no início de cada ciclo do Event Loop?",
+      "choices": [
+        {
+          "name": "Executar callbacks agendados por `setTimeout()` e `setInterval()` cujo tempo limite já expirou",
+          "value": "a"
+        },
+        {
+          "name": "Sincronizar o relógio do sistema operacional com o horário de Greenwich",
+          "value": "b"
+        },
+        {
+          "name": "Executar microtarefas de Promises resolvidas em fila única",
+          "value": "c"
+        },
+        {
+          "name": "Aguardar obrigatoriamente 1 segundo antes de liberar a Call Stack",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "A fase Timers é a primeira etapa do ciclo do Event Loop e processa os callbacks de `setTimeout` e `setInterval` cujos intervalos de tempo limite já foram atingidos."
+    },
+    {
+      "id": 3,
+      "question": "Qual é a ordem de prioridade de execução entre um callback de `process.nextTick()` e o `.then()` de uma Promise resolvida após a Call Stack síncrona ser esvaziada?",
+      "choices": [
+        {
+          "name": "A Promise executa primeiro por ser uma especificação padrão do ECMAScript",
+          "value": "a"
+        },
+        {
+          "name": "O callback de `process.nextTick()` executa antes do callback da Promise resolvida",
+          "value": "b"
+        },
+        {
+          "name": "Ambos são executados simultaneamente em núcleos diferentes da CPU",
+          "value": "c"
+        },
+        {
+          "name": "A ordem é definida aleatoriamente pelo garbage collector",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "No Node.js, a fila de microtarefas de `process.nextTick()` possui prioridade máxima e é processada imediatamente após a pilha síncrona atual, antes da fila de microtarefas de Promises."
+    },
+    {
+      "id": 4,
+      "question": "Em qual fase do Event Loop do Node.js os callbacks agendados com a função `setImmediate()` são executados?",
+      "choices": [
+        {
+          "name": "Fase Timers",
+          "value": "a"
+        },
+        {
+          "name": "Fase Poll",
+          "value": "b"
+        },
+        {
+          "name": "Fase Check",
+          "value": "c"
+        },
+        {
+          "name": "Fase Close Callbacks",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "A fase `Check` do Event Loop é dedicada especificamente à execução de callbacks registrados por `setImmediate()`, rodando logo após a fase de `Poll`."
+    },
+    {
+      "id": 5,
+      "question": "Se chamarmos `setImmediate()` e `setTimeout(..., 0)` dentro do callback de uma leitura de arquivo assíncrona (`fs.readFile`), qual será a ordem de execução garantida?",
+      "choices": [
+        {
+          "name": "`setTimeout` sempre executa antes de `setImmediate`",
+          "value": "a"
+        },
+        {
+          "name": "`setImmediate` sempre executa antes de `setTimeout`",
+          "value": "b"
+        },
+        {
+          "name": "A ordem é estritamente indefinida",
+          "value": "c"
+        },
+        {
+          "name": "Nenhum dos dois executa dentro de I/O",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Dentro de um callback de I/O (fase Poll), a próxima fase que o Event Loop visita imediatamente na sequência é a fase `Check` (onde roda `setImmediate`). A fase `Timers` só será alcançada na próxima rotação do ciclo."
+    },
+    {
+      "id": 6,
+      "question": "O que ocorre se um script invocar recursivamente `process.nextTick()` sem nenhuma condição de parada?",
+      "choices": [
+        {
+          "name": "O Node.js ignora automaticamente a chamada após a décima iteração",
+          "value": "a"
+        },
+        {
+          "name": "Causa a inanição (*starvation*) do Event Loop, impedindo-o de avançar para as fases de I/O e timers",
+          "value": "b"
+        },
+        {
+          "name": "O Node.js cria uma nova thread no sistema operacional para cada chamada",
+          "value": "c"
+        },
+        {
+          "name": "O script é convertido automaticamente para uma operação síncrona",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Como o Node.js esvazia toda a fila de `process.nextTick()` antes de transitar para a próxima fase do ciclo, um loop recursivo de nextTick paralisa completamente o Event Loop (starvation de I/O)."
+    },
+    {
+      "id": 7,
+      "question": "O que a máxima 'Don't block the Event Loop' alerta aos desenvolvedores Node.js?",
+      "choices": [
+        {
+          "name": "Evitar criar mais de uma rota em uma API HTTP",
+          "value": "a"
+        },
+        {
+          "name": "Evitar operações pesadas de CPU síncronas na thread principal para não congelar o processamento de outros eventos e requisições",
+          "value": "b"
+        },
+        {
+          "name": "Nunca utilizar bibliotecas de terceiros no projeto",
+          "value": "c"
+        },
+        {
+          "name": "Obrigar todas as funções do sistema a utilizarem timers com mais de 10 segundos",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Como o código JavaScript roda em uma thread única, qualquer cálculo pesado e síncrono trava a Call Stack, impedindo o Event Loop de atender outros clientes e requisições concorrentes."
+    },
+    {
+      "id": 8,
+      "question": "Qual módulo nativo do Node.js é projetado especificamente para descarregar tarefas pesadas de CPU para threads paralelas reais sem bloquear a thread principal?",
+      "choices": [
+        {
+          "name": "node:worker_threads",
+          "value": "a"
+        },
+        {
+          "name": "node:cluster_sync",
+          "value": "b"
+        },
+        {
+          "name": "node:process_cpu",
+          "value": "c"
+        },
+        {
+          "name": "node:crypto_pool",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O módulo `node:worker_threads` permite a criação de threads de trabalho verdadeiras para executar código JavaScript em paralelo com instâncias isoladas da V8, preservando o Event Loop principal livre para I/O."
+    },
+    {
+      "id": 9,
+      "question": "Qual é a função central da fase `Poll` no ciclo de eventos do Node.js?",
+      "choices": [
+        {
+          "name": "Excluir dados temporários da memória cache",
+          "value": "a"
+        },
+        {
+          "name": "Recuperar novos eventos de I/O (leitura de arquivos, dados de rede) e executar seus respectivos callbacks",
+          "value": "b"
+        },
+        {
+          "name": "Instalar automaticamente novas versões do interpretador V8",
+          "value": "c"
+        },
+        {
+          "name": "Organizar os pacotes na pasta node_modules",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A fase `Poll` é o coração das operações de I/O: nela o Node.js busca e processa novos eventos de conexões, requisições recebidas e respostas do disco, decidindo também quanto tempo aguardar se a fila estiver vazia."
+    },
+    {
+      "id": 10,
+      "question": "Como o Node.js consegue lidar com milhares de conexões de rede simultâneas utilizando apenas uma única thread principal de JavaScript?",
+      "choices": [
+        {
+          "name": "Ele duplica a máquina virtual do Node.js na nuvem para cada conexão",
+          "value": "a"
+        },
+        {
+          "name": "Ele delega o monitoramento de conexões ao kernel do sistema operacional e à libuv de forma não-bloqueante, sendo notificado apenas quando há dados prontos",
+          "value": "b"
+        },
+        {
+          "name": "Ele bloqueia os clientes em fila de espera pausando a conexão de rede",
+          "value": "c"
+        },
+        {
+          "name": "Ele converte todas as requisições em arquivos de texto estáticos no disco",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O modelo Non-Blocking I/O do Node.js utiliza mecanismos nativos dos kernels modernos (como epoll, kqueue ou IOCP) via libuv. O Node.js não gasta threads aguardando conexões ociosas; ele apenas reage aos eventos quando os dados chegam."
+    }
+  ]
+}

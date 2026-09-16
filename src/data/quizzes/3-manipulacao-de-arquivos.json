@@ -1,0 +1,246 @@
+{
+  "module": "manipulacao-de-arquivos",
+  "title": "Quiz: Manipulação de Arquivos e o Módulo fs",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual é a principal diferença de comportamento entre métodos síncronos (como `fs.readFileSync`) e assíncronos (como `fs.promises.readFile`) no Node.js?",
+      "choices": [
+        {
+          "name": "Métodos síncronos são executados em threads do sistema operacional enquanto assíncronos rodam apenas na memória RAM",
+          "value": "a"
+        },
+        {
+          "name": "Métodos síncronos bloqueiam o Event Loop e a thread principal até o término da leitura, enquanto métodos assíncronos liberam o Event Loop para processar outras tarefas",
+          "value": "b"
+        },
+        {
+          "name": "Métodos assíncronos só podem ler arquivos com menos de 10 megabytes, enquanto síncronos não possuem limite de tamanho",
+          "value": "c"
+        },
+        {
+          "name": "Métodos síncronos exigem obrigatoriamente a instalação do pacote NPM 'fs-sync'",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Métodos síncronos paralisam a execução do JavaScript na thread principal até que o disco finalize a operação de I/O. Já os métodos assíncronos não bloqueiam o Event Loop, permitindo que o Node.js continue processando outros eventos e requisições concorrentes."
+    },
+    {
+      "id": 2,
+      "question": "O que é retornado por padrão pela função `fs.promises.readFile(caminho)` caso nenhum parâmetro de codificação (encoding) seja especificado?",
+      "choices": [
+        {
+          "name": "Uma string de texto vazia",
+          "value": "a"
+        },
+        {
+          "name": "Um objeto do tipo `Buffer` contendo os bytes puros do arquivo",
+          "value": "b"
+        },
+        {
+          "name": "Uma string codificada automaticamente em ASCII",
+          "value": "c"
+        },
+        {
+          "name": "Um array de objetos JSON prontos para consumo",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Se a codificação não for informada (como 'utf-8'), o Node.js assume que você deseja manipular dados binários brutos e retorna uma instância da classe `Buffer`."
+    },
+    {
+      "id": 3,
+      "question": "Qual módulo nativo moderno permite utilizar a sintaxe `async/await` diretamente com funções de sistema de arquivos sem necessidade de callbacks legados?",
+      "choices": [
+        {
+          "name": "node:fs/async",
+          "value": "a"
+        },
+        {
+          "name": "node:fs/promises",
+          "value": "b"
+        },
+        {
+          "name": "node:fs-await",
+          "value": "c"
+        },
+        {
+          "name": "node:path/fs",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O submódulo `node:fs/promises` (ou `fs/promises`) exporta versões baseadas em Promises de praticamente todas as funções do `fs`, permitindo o uso limpo de `async/await` e tratamento via blocos `try...catch`."
+    },
+    {
+      "id": 4,
+      "question": "Ao utilizar `fs.promises.mkdir('pasta1/pasta2/pasta3')`, qual opção deve ser passada no segundo argumento para criar toda a hierarquia de pastas intermediárias sem gerar erro?",
+      "choices": [
+        {
+          "name": "{ all: true }",
+          "value": "a"
+        },
+        {
+          "name": "{ deep: true }",
+          "value": "b"
+        },
+        {
+          "name": "{ recursive: true }",
+          "value": "c"
+        },
+        {
+          "name": "{ force: true }",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "A opção `{ recursive: true }` instrui o Node.js a criar automaticamente todos os diretórios pais intermediários que ainda não existam no caminho especificado, equivalente ao comando Unix `mkdir -p`."
+    },
+    {
+      "id": 5,
+      "question": "Qual método do módulo `fs` deve ser utilizado para anexar novos dados ao final de um arquivo já existente sem sobrescrever o conteúdo anterior?",
+      "choices": [
+        {
+          "name": "fs.promises.writeFile()",
+          "value": "a"
+        },
+        {
+          "name": "fs.promises.insertFile()",
+          "value": "b"
+        },
+        {
+          "name": "fs.promises.appendFile()",
+          "value": "c"
+        },
+        {
+          "name": "fs.promises.pushFile()",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "O método `appendFile` adiciona os dados especificados ao final do arquivo sem apagar o conteúdo pré-existente. Se o arquivo ainda não existir, ele é criado automaticamente."
+    },
+    {
+      "id": 6,
+      "question": "O que significa o código de erro de sistema `ENOENT` frequentemente emitido por operações do módulo `fs`?",
+      "choices": [
+        {
+          "name": "Error NO ENTry: o arquivo ou diretório especificado não foi encontrado no caminho informado",
+          "value": "a"
+        },
+        {
+          "name": "Error Not Open Entity: o arquivo está corrompido ou travado por outro processo",
+          "value": "b"
+        },
+        {
+          "name": "Encoding Not Opt-in Entity: a codificação de caracteres informada não é suportada",
+          "value": "c"
+        },
+        {
+          "name": "Empty Node Output: o arquivo existe, mas está completamente vazio (zero bytes)",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "`ENOENT` é a abreviação para 'Error NO ENTry'. Trata-se do código de erro padrão POSIX emitido quando o caminho fornecido aponta para um arquivo ou pasta inexistente."
+    },
+    {
+      "id": 7,
+      "question": "Por que checar previamente a existência de um arquivo usando `existsSync` ou `access` antes de tentar abri-lo com `readFile` é considerado um antipadrão (bad practice)?",
+      "choices": [
+        {
+          "name": "Porque o método `existsSync` apaga o arquivo do disco após a checagem",
+          "value": "a"
+        },
+        {
+          "name": "Porque introduz uma condição de corrida (Race Condition / TOCTOU), pois outro processo pode modificar ou excluir o arquivo entre a checagem e a leitura real",
+          "value": "b"
+        },
+        {
+          "name": "Porque o Node.js não permite o uso de condicionais `if` ao redor de chamadas assíncronas",
+          "value": "c"
+        },
+        {
+          "name": "Porque o método `readFile` exige que o arquivo nunca tenha sido verificado antes na mesma sessão",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Esse problema de concorrência é conhecido como TOCTOU ('Time-Of-Check to Time-Of-Use'). A melhor prática no Node.js é tentar a operação diretamente e capturar o erro com `try...catch`, tratando `ENOENT` se necessário."
+    },
+    {
+      "id": 8,
+      "question": "Qual método nativo do módulo `fs` é o padrão para deletar (remover) um único arquivo do sistema de arquivos?",
+      "choices": [
+        {
+          "name": "fs.promises.remove()",
+          "value": "a"
+        },
+        {
+          "name": "fs.promises.delete()",
+          "value": "b"
+        },
+        {
+          "name": "fs.promises.unlink()",
+          "value": "c"
+        },
+        {
+          "name": "fs.promises.drop()",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "O método `unlink()` (ou `fs.promises.unlink()`) é a função padrão herdada de sistemas POSIX para remover o link de um arquivo do sistema de arquivos, efetivamente excluindo-o."
+    },
+    {
+      "id": 9,
+      "question": "Dado o objeto de estatísticas `stats = await fs.promises.stat(caminho)`, quais métodos devem ser usados para checar se o caminho é um arquivo ou uma pasta?",
+      "choices": [
+        {
+          "name": "stats.file e stats.directory (como propriedades booleanas simples)",
+          "value": "a"
+        },
+        {
+          "name": "stats.isFile() e stats.isDirectory() (como funções utilitárias)",
+          "value": "b"
+        },
+        {
+          "name": "typeof stats === 'file' e typeof stats === 'folder'",
+          "value": "c"
+        },
+        {
+          "name": "stats.checkType('file') e stats.checkType('folder')",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O objeto `fs.Stats` retornado por `stat` disponibiliza métodos como `.isFile()`, `.isDirectory()`, `.isSymbolicLink()`, além de propriedades como `.size` (tamanho em bytes) e `.mtime` (data de modificação)."
+    },
+    {
+      "id": 10,
+      "question": "Em um servidor web de alta demanda, qual é o impacto direto de utilizar `fs.readFileSync()` dentro de uma rota de API?",
+      "choices": [
+        {
+          "name": "Nenhum, pois o Node.js cria automaticamente uma nova thread isolada para cada requisição HTTP",
+          "value": "a"
+        },
+        {
+          "name": "A thread principal do Event Loop é bloqueada durante a leitura do disco, deixando todas as outras requisições congeladas",
+          "value": "b"
+        },
+        {
+          "name": "O processo do Node.js é imediatamente finalizado pelo sistema operacional por segurança",
+          "value": "c"
+        },
+        {
+          "name": "A rota é convertida automaticamente em um WebSocket em segundo plano",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O Node.js executa JavaScript em uma thread única (Event Loop). Chamar uma função síncrona como `readFileSync` congela a thread inteira até a conclusão da I/O do disco, impedindo o atendimento a qualquer outra requisição concorrente."
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "module": "servidor-http",
+  "title": "Quiz: Servidores Web Nativos com o Módulo http",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual método nativo do módulo `http` é utilizado para instanciar um novo servidor HTTP no Node.js?",
+      "choices": [
+        {
+          "name": "http.startServer()",
+          "value": "a"
+        },
+        {
+          "name": "http.createServer()",
+          "value": "b"
+        },
+        {
+          "name": "http.listen()",
+          "value": "c"
+        },
+        {
+          "name": "http.newServer()",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O método `http.createServer([options][, requestListener])` cria e retorna uma nova instância de `http.Server` pronta para escutar conexões de rede."
+    },
+    {
+      "id": 2,
+      "question": "Quais são os dois parâmetros recebidos pela função de callback passada para `http.createServer((req, res) => {})`?",
+      "choices": [
+        {
+          "name": "O objeto de rotas e o template HTML",
+          "value": "a"
+        },
+        {
+          "name": "A requisição de entrada (`req`) e a resposta do servidor (`res`)",
+          "value": "b"
+        },
+        {
+          "name": "A conexão de banco de dados e o token de autenticação",
+          "value": "c"
+        },
+        {
+          "name": "O socket bruto e o número da porta",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "`req` é uma instância de `http.IncomingMessage` que encapsula dados enviados pelo cliente, e `res` é uma instância de `http.ServerResponse` utilizada para construir e emitir a resposta."
+    },
+    {
+      "id": 3,
+      "question": "O que ocorre no navegador do cliente se a sua rota no servidor Node.js processar a lógica, mas nunca invocar o método `res.end()`?",
+      "choices": [
+        {
+          "name": "A resposta é enviada automaticamente com status 200 após 1 segundo",
+          "value": "a"
+        },
+        {
+          "name": "O cliente permanece com a conexão travada em carregamento até atingir o tempo limite de timeout da rede",
+          "value": "b"
+        },
+        {
+          "name": "O processo do Node.js é imediatamente finalizado com erro crítico",
+          "value": "c"
+        },
+        {
+          "name": "O cliente recebe uma página de erro 404 instantaneamente",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O método `res.end()` é obrigatório para comunicar ao cliente e ao socket TCP que todos os bytes da resposta foram entregues. Sem ele, o cliente aguarda indefinidamente até atingir timeout."
+    },
+    {
+      "id": 4,
+      "question": "Por que no módulo `http` nativo o corpo de uma requisição `POST` com JSON não está pronto em `req.body`?",
+      "choices": [
+        {
+          "name": "Porque o Node.js não tem capacidade de processar dados em formato JSON",
+          "value": "a"
+        },
+        {
+          "name": "Porque o objeto `req` é um Readable Stream, entregando os dados aos poucos em pedaços de bytes conforme trafegam pela rede",
+          "value": "b"
+        },
+        {
+          "name": "Porque requisições `POST` são desabilitadas por padrão no protocolo HTTP nativo",
+          "value": "c"
+        },
+        {
+          "name": "Porque o método `POST` exige obrigatoriamente a instalação de um compilador C++ externo",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "No Node.js puro, `req` é um fluxo contínuo de leitura (*Readable Stream*). Para obter o corpo enviado pelo cliente, é preciso escutar os eventos de stream `'data'` e agrupá-los até o evento `'end'`."
+    },
+    {
+      "id": 5,
+      "question": "Qual evento disparado pelo objeto `req` sinaliza que todos os dados do corpo da requisição foram completamente recebidos pelo servidor?",
+      "choices": [
+        {
+          "name": "'ready'",
+          "value": "a"
+        },
+        {
+          "name": "'close'",
+          "value": "b"
+        },
+        {
+          "name": "'end'",
+          "value": "c"
+        },
+        {
+          "name": "'success'",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "O evento `'end'` em um Readable Stream indica que não há mais blocos de dados a serem transmitidos daquele fluxo, sendo o momento correto para converter os buffers e fazer o `JSON.parse()`."
+    },
+    {
+      "id": 6,
+      "question": "Qual cabeçalho HTTP deve ser definido para indicar explicitamente que a resposta enviada ao cliente é um documento JSON?",
+      "choices": [
+        {
+          "name": "'Content-Type': 'text/plain'",
+          "value": "a"
+        },
+        {
+          "name": "'Content-Type': 'application/json'",
+          "value": "b"
+        },
+        {
+          "name": "'Response-Format': 'json'",
+          "value": "c"
+        },
+        {
+          "name": "'Accept': 'text/json'",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O cabeçalho MIME type `'Content-Type': 'application/json'` informa aos clientes que o payload de resposta contém dados estruturados em JSON."
+    },
+    {
+      "id": 7,
+      "question": "Qual é o código de status HTTP ideal para responder a uma requisição `POST` que acabou de cadastrar com sucesso um novo usuário no sistema?",
+      "choices": [
+        {
+          "name": "200 OK",
+          "value": "a"
+        },
+        {
+          "name": "201 Created",
+          "value": "b"
+        },
+        {
+          "name": "204 No Content",
+          "value": "c"
+        },
+        {
+          "name": "302 Found",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O status HTTP `201 Created` é a resposta semântica recomendada pelas convenções REST para indicar que a requisição gerou com êxito um novo recurso no servidor."
+    },
+    {
+      "id": 8,
+      "question": "Qual erro de sistema operacional o Node.js emite ao tentar iniciar um servidor em uma porta TCP que já está ocupada por outro aplicativo?",
+      "choices": [
+        {
+          "name": "ENOENT",
+          "value": "a"
+        },
+        {
+          "name": "ECONNRESET",
+          "value": "b"
+        },
+        {
+          "name": "EADDRINUSE",
+          "value": "c"
+        },
+        {
+          "name": "ENOTFOUND",
+          "value": "d"
+        }
+      ],
+      "correct": "c",
+      "explanation": "O erro `EADDRINUSE` (*Error Address Already In Use*) sinaliza que o endereço IP e a porta de rede informados já se encontram ocupados por outro processo em execução."
+    },
+    {
+      "id": 9,
+      "question": "O que caracteriza a prática de Graceful Shutdown em um servidor web Node.js?",
+      "choices": [
+        {
+          "name": "Desligar o computador imediatamente quando houver erro 500",
+          "value": "a"
+        },
+        {
+          "name": "Interceptar sinais de encerramento do SO (como `SIGINT`/`SIGTERM`) e fechar o servidor com `server.close()`, aguardando as requisições em andamento terminarem",
+          "value": "b"
+        },
+        {
+          "name": "Limpar todos os arquivos da pasta temporária a cada requisição",
+          "value": "c"
+        },
+        {
+          "name": "Rejeitar conexões de navegadores antigos automaticamente",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O encerramento gracioso impede que conexões em processamento sejam abruptamente cortadas no momento de uma nova implantação ou reinicialização do container, permitindo finalizar transações ativas com segurança."
+    },
+    {
+      "id": 10,
+      "question": "Como podemos extrair parâmetros de busca (*query strings*) de forma segura e moderna a partir de `req.url` no Node.js nativo?",
+      "choices": [
+        {
+          "name": "Instanciando a classe padrão `new URL(req.url, 'http://localhost')` e acessando a propriedade `searchParams`",
+          "value": "a"
+        },
+        {
+          "name": "Chamando o método `req.url.extractParams()`",
+          "value": "b"
+        },
+        {
+          "name": "Lendo a variável de ambiente global `process.QUERY`",
+          "value": "c"
+        },
+        {
+          "name": "Utilizando a função síncrona `path.parseQuery(req.url)`",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "A API global `URL` (padrão WHATWG) analisa URLs com facilidade. Passando uma base fictícia para URLs relativas, `url.searchParams.get('parametro')` extrai os valores da query string de forma segura."
+    }
+  ]
+}

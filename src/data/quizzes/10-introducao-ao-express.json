@@ -1,0 +1,246 @@
+{
+  "module": "introducao-ao-express",
+  "title": "Quiz: Introdução ao Express.js",
+  "questions": [
+    {
+      "id": 1,
+      "question": "O que é o Express.js no ecossistema Node.js?",
+      "choices": [
+        {
+          "name": "Um compilador de código JavaScript para binário de baixo nível",
+          "value": "a"
+        },
+        {
+          "name": "Um framework web minimalista e não-opinativo que simplifica o desenvolvimento de servidores HTTP, rotas e APIs",
+          "value": "b"
+        },
+        {
+          "name": "Um banco de dados em memória temporária concorrente do Redis",
+          "value": "c"
+        },
+        {
+          "name": "Um motor de inteligência artificial embutido no V8",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O Express.js é o framework web mais consolidado do Node.js, fornecendo abstrações elegantes para roteamento de requisições, middlewares e criação de APIs REST."
+    },
+    {
+      "id": 2,
+      "question": "Qual middleware embutido do Express deve ser ativado com `app.use()` para permitir o parsing automático do corpo das requisições enviadas em JSON?",
+      "choices": [
+        {
+          "name": "express.urlencoded()",
+          "value": "a"
+        },
+        {
+          "name": "express.json()",
+          "value": "b"
+        },
+        {
+          "name": "express.static()",
+          "value": "c"
+        },
+        {
+          "name": "express.buffer()",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O middleware `express.json()` intercepta requisições com cabeçalho `Content-Type: application/json`, faz o parsing dos buffers brutos e injeta o objeto resultante pronto em `req.body`."
+    },
+    {
+      "id": 3,
+      "question": "Qual é a assinatura de parâmetros de uma função de middleware padrão no Express?",
+      "choices": [
+        {
+          "name": "function(app, config)",
+          "value": "a"
+        },
+        {
+          "name": "function(req, res, next)",
+          "value": "b"
+        },
+        {
+          "name": "function(path, handler)",
+          "value": "c"
+        },
+        {
+          "name": "function(request, database)",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Um middleware comum no Express recebe três parâmetros: `req` (a requisição), `res` (a resposta) e `next` (a função para transferir o controle para o próximo middleware da cadeia)."
+    },
+    {
+      "id": 4,
+      "question": "O que ocorre se um middleware no Express não enviar uma resposta ao cliente e também não invocar a função `next()`?",
+      "choices": [
+        {
+          "name": "O Express dispara um erro 500 automaticamente",
+          "value": "a"
+        },
+        {
+          "name": "A requisição fica travada indefinidamente até que o cliente atinja timeout de rede",
+          "value": "b"
+        },
+        {
+          "name": "O Express pula sozinho para a próxima rota cadastrada",
+          "value": "c"
+        },
+        {
+          "name": "O processo do Node.js encerra imediatamente",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A execução da cadeia de middlewares depende da invocação explícita de `next()` ou de um método de encerramento da resposta (como `res.json()`). Caso nenhum seja chamado, a conexão fica congelada."
+    },
+    {
+      "id": 5,
+      "question": "Em uma rota declarada como `app.get('/pedidos/:idPedido', ...)`, como o desenvolvedor acessa o ID informado pelo cliente na URL?",
+      "choices": [
+        {
+          "name": "req.query.idPedido",
+          "value": "a"
+        },
+        {
+          "name": "req.params.idPedido",
+          "value": "b"
+        },
+        {
+          "name": "req.body.idPedido",
+          "value": "c"
+        },
+        {
+          "name": "req.headers.idPedido",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Parâmetros dinâmicos de rota definidos com dois pontos (`:nome`) são capturados pelo Express e agrupados dentro do objeto `req.params`."
+    },
+    {
+      "id": 6,
+      "question": "Ao receber uma requisição na URL `http://localhost:3000/livros?autor=machado&ano=1899`, como acessamos os parâmetros de filtro no Express?",
+      "choices": [
+        {
+          "name": "Através das propriedades do objeto `req.query` (como `req.query.autor`)",
+          "value": "a"
+        },
+        {
+          "name": "Através do objeto `req.params`",
+          "value": "b"
+        },
+        {
+          "name": "Através do objeto `req.body`",
+          "value": "c"
+        },
+        {
+          "name": "Através da função `req.getQueryParams()`",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "Os valores passados na query string após o caractere `?` são automaticamente decodificados e disponibilizados como propriedades do objeto `req.query`."
+    },
+    {
+      "id": 7,
+      "question": "Qual método do objeto `res` serializa dados em formato JSON, configura o cabeçalho `Content-Type: application/json` e finaliza a transmissão da resposta?",
+      "choices": [
+        {
+          "name": "res.writeJSON()",
+          "value": "a"
+        },
+        {
+          "name": "res.json()",
+          "value": "b"
+        },
+        {
+          "name": "res.stringify()",
+          "value": "c"
+        },
+        {
+          "name": "res.serialize()",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O método utilitário `res.json([dados])` do Express converte automaticamente o objeto JavaScript em uma string JSON, injeta os cabeçalhos apropriados e encerra a resposta."
+    },
+    {
+      "id": 8,
+      "question": "Como podemos enviar uma resposta com status HTTP 201 Created acompanhada de um payload JSON no Express?",
+      "choices": [
+        {
+          "name": "res.statusCode(201, { mensagem: 'Criado' })",
+          "value": "a"
+        },
+        {
+          "name": "res.status(201).json({ mensagem: 'Criado' })",
+          "value": "b"
+        },
+        {
+          "name": "res.send({ status: 201, mensagem: 'Criado' })",
+          "value": "c"
+        },
+        {
+          "name": "res.set({ code: 201 }).json({ mensagem: 'Criado' })",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O Express suporta encadeamento de métodos (*method chaining*). O método `res.status(201)` configura o código de resposta HTTP e retorna o objeto `res`, permitindo chamar `.json(...)` em seguida."
+    },
+    {
+      "id": 9,
+      "question": "Como o Express identifica que um determinado middleware é um Middleware Centralizado de Tratamento de Erros?",
+      "choices": [
+        {
+          "name": "Pelo nome da função que deve se chamar estritamente `errorMiddleware`",
+          "value": "a"
+        },
+        {
+          "name": "Pelo número de parâmetros declarados na função: middlewares de erro recebem obrigatoriamente 4 parâmetros `(err, req, res, next)`",
+          "value": "b"
+        },
+        {
+          "name": "Pela declaração de uma flag `{ error: true }` no `app.use()`",
+          "value": "c"
+        },
+        {
+          "name": "O Express não suporta middlewares de erro",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O Express avalia o arity (quantidade de argumentos esperados) da função através de `fn.length`. Quando uma função recebe exatamente 4 parâmetros `(err, req, res, next)`, ela é registrada como middleware de tratamento de erros."
+    },
+    {
+      "id": 10,
+      "question": "Qual recurso nativo do Express é recomendado para dividir e organizar grupos de rotas em arquivos separados e reutilizáveis?",
+      "choices": [
+        {
+          "name": "express.Module()",
+          "value": "a"
+        },
+        {
+          "name": "express.Router()",
+          "value": "b"
+        },
+        {
+          "name": "express.SubApp()",
+          "value": "c"
+        },
+        {
+          "name": "express.Controller()",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `express.Router()` cria instâncias modulares e isoladas de roteamento que podem ser configuradas em arquivos individuais e posteriormente acopladas à aplicação principal com `app.use()`."
+    }
+  ]
+}

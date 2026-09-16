@@ -1,0 +1,246 @@
+{
+  "module": "criacao-de-cli",
+  "title": "Quiz: Criação de Ferramentas CLI no Node.js",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Qual é o propósito da linha Shebang (`#!/usr/bin/env node`) no topo do arquivo executável de uma CLI?",
+      "choices": [
+        {
+          "name": "Otimizar o uso de memória RAM antes de rodar o script",
+          "value": "a"
+        },
+        {
+          "name": "Instruir o sistema operacional a usar o interpretador Node.js disponível no ambiente para executar o arquivo",
+          "value": "b"
+        },
+        {
+          "name": "Ativar automaticamente a criptografia de arquivos do projeto",
+          "value": "c"
+        },
+        {
+          "name": "Conectar a CLI ao registro oficial de pacotes do NPM",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A linha Shebang (`#!`) informa ao interpretador de comandos do sistema operacional que o script a seguir deve ser executado pelo binário do Node.js encontrado nas variáveis de ambiente."
+    },
+    {
+      "id": 2,
+      "question": "Qual propriedade do arquivo `package.json` registra o nome do comando que o usuário digitará no terminal para acionar a CLI?",
+      "choices": [
+        {
+          "name": "\"scripts\"",
+          "value": "a"
+        },
+        {
+          "name": "\"bin\"",
+          "value": "b"
+        },
+        {
+          "name": "\"command\"",
+          "value": "c"
+        },
+        {
+          "name": "\"cli\"",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O campo `\"bin\"` do `package.json` associa o comando de terminal (ex: `\"tq-node\"`) ao caminho do arquivo JavaScript de inicialização da ferramenta (ex: `\"./bin/index.js\"`)."
+    },
+    {
+      "id": 3,
+      "question": "Durante a fase de desenvolvimento local, qual comando do NPM permite testar a CLI globalmente no sistema sem precisar publicá-la?",
+      "choices": [
+        {
+          "name": "npm test",
+          "value": "a"
+        },
+        {
+          "name": "npm link",
+          "value": "b"
+        },
+        {
+          "name": "npm publish --dry-run",
+          "value": "c"
+        },
+        {
+          "name": "npm globalize",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O comando `npm link` cria um link simbólico global no sistema operacional apontando diretamente para o diretório local do projeto, permitindo testar o comando em qualquer terminal."
+    },
+    {
+      "id": 4,
+      "question": "Na biblioteca Commander.js, qual é a convenção para indicar que um parâmetro de uma flag é de preenchimento obrigatório?",
+      "choices": [
+        {
+          "name": "Colchetes retos: `.option('-f, --formato [tipo]')`",
+          "value": "a"
+        },
+        {
+          "name": "Colchetes angulares: `.option('-f, --formato <tipo>')`",
+          "value": "b"
+        },
+        {
+          "name": "Chaves: `.option('-f, --formato {tipo}')`",
+          "value": "c"
+        },
+        {
+          "name": "Parênteses: `.option('-f, --formato (tipo)')`",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "No Commander.js, argumentos envoltos por `<parametro>` são considerados obrigatórios, enquanto `[parametro]` define opções opcionais."
+    },
+    {
+      "id": 5,
+      "question": "Qual é a principal função da biblioteca `@inquirer/prompts` no desenvolvimento de ferramentas de terminal?",
+      "choices": [
+        {
+          "name": "Controlar a velocidade de rotação das ventoinhas do computador",
+          "value": "a"
+        },
+        {
+          "name": "Criar formulários e prompts interativos amigáveis, como menus de seleção, inputs e confirmações",
+          "value": "b"
+        },
+        {
+          "name": "Renderizar páginas web inteiras dentro de um canvas",
+          "value": "c"
+        },
+        {
+          "name": "Compilar o código JavaScript para binário nativo",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "O `@inquirer/prompts` oferece uma coleção de funções modernas de prompts para coletar respostas do usuário via terminal com interface interativa e navegação por teclado."
+    },
+    {
+      "id": 6,
+      "question": "Qual código de saída (*Exit Code*) indica ao sistema operacional que a execução da CLI foi bem-sucedida sem erros?",
+      "choices": [
+        {
+          "name": "process.exit(0)",
+          "value": "a"
+        },
+        {
+          "name": "process.exit(1)",
+          "value": "b"
+        },
+        {
+          "name": "process.exit(200)",
+          "value": "c"
+        },
+        {
+          "name": "process.exit(-1)",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O código numérico `0` é o padrão universal para sinalizar conclusão com êxito em sistemas Unix e Windows. Qualquer código não-zero (como 1) comunica que houve erro."
+    },
+    {
+      "id": 7,
+      "question": "Por que é fundamental que uma ferramenta CLI emita Exit Codes corretos ao falhar?",
+      "choices": [
+        {
+          "name": "Para economizar eletricidade da placa-mãe",
+          "value": "a"
+        },
+        {
+          "name": "Porque scripts em bash e esteiras de CI/CD avaliam o Exit Code para saber se devem interromper ou continuar a automação",
+          "value": "b"
+        },
+        {
+          "name": "Para permitir que o terminal mude de cor automaticamente",
+          "value": "c"
+        },
+        {
+          "name": "Para obrigar o usuário a reiniciar o sistema operacional",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "Automações, operadores de terminal (como `&&`) e pipelines de CI/CD utilizam o Exit Code retornado pelo processo para detectar falhas e abortar a esteira imediatamente."
+    },
+    {
+      "id": 8,
+      "question": "Qual pacote é amplamente utilizado no Node.js para colorir e estilizar o texto impresso no terminal (ex: negrito, verde, vermelho)?",
+      "choices": [
+        {
+          "name": "chalk",
+          "value": "a"
+        },
+        {
+          "name": "css-terminal",
+          "value": "b"
+        },
+        {
+          "name": "colorizer-v8",
+          "value": "c"
+        },
+        {
+          "name": "terminal-styler",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O `chalk` é o pacote padrão do ecossistema Node.js para estilização visual de terminais, suportando cores ANSI, fundos coloridos e estilos como bold e dim."
+    },
+    {
+      "id": 9,
+      "question": "Qual sinal do sistema operacional é emitido quando o usuário pressiona as teclas `Ctrl + C` no terminal?",
+      "choices": [
+        {
+          "name": "SIGINT",
+          "value": "a"
+        },
+        {
+          "name": "SIGKILL",
+          "value": "b"
+        },
+        {
+          "name": "SIGUSR1",
+          "value": "c"
+        },
+        {
+          "name": "SIGSTOP",
+          "value": "d"
+        }
+      ],
+      "correct": "a",
+      "explanation": "O sinal `SIGINT` (*Signal Interrupt*) é gerado pelo terminal ao pressionar Ctrl+C. Tratar esse sinal com `process.on('SIGINT', ...)` permite encerrar o programa de forma amigável."
+    },
+    {
+      "id": 10,
+      "question": "No Commander.js, qual instrução é responsável por iniciar a leitura e interpretação dos argumentos informados no terminal?",
+      "choices": [
+        {
+          "name": "program.start()",
+          "value": "a"
+        },
+        {
+          "name": "program.parse(process.argv)",
+          "value": "b"
+        },
+        {
+          "name": "program.executeCommandLine()",
+          "value": "c"
+        },
+        {
+          "name": "program.listen()",
+          "value": "d"
+        }
+      ],
+      "correct": "b",
+      "explanation": "A chamada `program.parse(process.argv)` passa os argumentos brutos da linha de comando ao Commander, que analisa os comandos, flags e executa a ação correspondente."
+    }
+  ]
+}
